@@ -25,6 +25,8 @@ for review in reviews:
 
 # Task 2: Sentiment Tally
 
+import string
+
 positive_words = ["good", "excellent", "great", "awesome", "fantastic", "superb", "amazing"]
 negative_words = ["bad", "poor", "terrible", "horrible", "awful", "disappointing", "subpar"]
 
@@ -40,13 +42,16 @@ def tally(reviews, positive_words, negative_words):
     total_positive = 0
     total_negative = 0
     
+    translator = str.maketrans('', '', string.punctuation + string.digits)
+
     for review in reviews:
-        words = review.lower().split()
+        cleaned_review = review.lower().translate(translator)
+        words = cleaned_review.split()
         for word in words:
             if word in positive_words:
-                total_positive += 1
+                    total_positive += 1
             elif word in negative_words:
-                total_negative += 1
+                    total_negative += 1    
                 
     return total_positive, total_negative
 
